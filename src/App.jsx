@@ -1,11 +1,12 @@
 import React from "react";
 
 const App = () => {
-  <div>
-    <Header />
+  <>
+    <p>作成中です．</p>
+    {/* <Header />
 
-    <Footer />
-  </div>;
+    <Footer /> */}
+  </>;
 };
 
 export default App;
