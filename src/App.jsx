@@ -10,6 +10,7 @@ const App = () => {
         <button type="button">クリック！</button>
       </div>
       <p>寿司食べたいな</p>
+      <p>うさぎにんじゃ</p>
     </>
   );
 };
