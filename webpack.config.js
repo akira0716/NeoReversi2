@@ -27,6 +27,19 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        //拡張子がpng,jpg,gif,svgを検知したら
+        test: /\.(png|jpg|gif|svg|ico)/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              //[name]は画像名、[ext]は拡張子
+              name: "images/[name].[ext]",
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -36,7 +49,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: __dirname + "/src/index.html",
-      favicon: __dirname + "/src/public/favicon.ico",
+
+9835a868e88661dc1a413451406b5c
     }),
   ],
   devServer: {
