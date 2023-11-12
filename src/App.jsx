@@ -5,7 +5,7 @@ const App = () => {
     <>
       <h1>Hello, React!</h1>
       <p>現在Reactを学習しています</p>
-      <p>このアプリで卒業制作を作成しましょう‼</p>
+      <p>このアプリで卒業制作を作成しましょう．</p>
       <div>
         <button type="button">クリック！</button>
       </div>
