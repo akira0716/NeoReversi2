@@ -7,14 +7,14 @@ const Home = () => {
       <h1>トップページ</h1>
       <br />
       <p>
-        <Link to="/page01">
-          <button className="btn btn-primary">ページ1へ</button>
+        <Link to="/PlayGame">
+          <button className="btn btn-primary">Game Start</button>
         </Link>
       </p>
       <br />
       <p>
-        <Link to="/page02">
-          <button className="btn btn-primary">ページ2へ</button>
+        <Link to="/Result">
+          <button className="btn btn-primary">結果画面</button>
         </Link>
       </p>
     </div>
