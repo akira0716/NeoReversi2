@@ -54,6 +54,7 @@ module.exports = {
     }),
   ],
   devServer: {
+    historyApiFallback: true,
     static: {
       directory: __dirname + "/dist",
     },
