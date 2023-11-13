@@ -1,9 +1,10 @@
 import React from "react";
+import GameBoard from "../components/GameBoard";
 
 const PlayGame = () => {
   return (
     <div>
-      <h1>ゲーム画面</h1>
+      <GameBoard />
     </div>
   );
 };
