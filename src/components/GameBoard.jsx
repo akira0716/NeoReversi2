@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../css/game.css";
 
-import { checkValidMove } from "../logic/GameBoard_logic";
+import { checkValidMove, putKoma } from "../logic/GameBoard_logic";
+
+import image from "../public/MusoMode.jpg";
 
 let Board = [
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -13,6 +15,8 @@ let Board = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
 ];
+
+const mode = "normals";
 
 const GameBoard = () => {
   const [board, setBoard] = useState(Board);
@@ -44,22 +48,24 @@ const GameBoard = () => {
     setPlayer(player === 1 ? 2 : 1);
   };
 
-  const Sample = (value) => {
-    switch (value) {
-      case 1:
-        return <div className="koma-kuro"></div>;
-      case 2:
-        return <div className="koma-shiro"></div>;
-
-      default:
-        break;
-    }
+  const boardStyle = {
+    normal: {
+      backgroundColor: "rgb(3, 157, 31)",
+    },
+    muso: {
+      backgroundImage: `url(${image})`,
+      objectFit: "cover",
+      backgroundSize: "cover",
+    },
   };
 
   return (
     <>
       <div className="board-wrap">
-        <div className="board">
+        <div
+          className="board"
+          style={mode === "normal" ? boardStyle.normal : boardStyle.muso}
+        >
           {[...Array(8)].map((_, rowIndex) => {
             return (
               <div key={`row${rowIndex}`} className="row">
@@ -72,7 +78,7 @@ const GameBoard = () => {
                       data-column={columnIndex}
                       onClick={handleClick}
                     >
-                      {Sample(board[rowIndex][columnIndex])}
+                      {putKoma(board[rowIndex][columnIndex])}
                       {checkValidMove(board, rowIndex, columnIndex, player)}
                     </div>
                   );

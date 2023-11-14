@@ -1,5 +1,16 @@
 import React from "react";
 
+export const putKoma = (value) => {
+  switch (value) {
+    case 1:
+      return <div className="koma-kuro"></div>;
+    case 2:
+      return <div className="koma-shiro"></div>;
+    default:
+      break;
+  }
+};
+
 export const checkValidMove = (board, row, col, player, event = false) => {
   const directions = [
     { row: -1, col: 0 }, // 上
