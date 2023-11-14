@@ -1,7 +1,15 @@
+.board-wrap {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
 .board {
   width: 800px;
   height: 800px;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 .box {
@@ -10,6 +18,9 @@
   border: 1px solid #000;
   background-color: rgb(3, 157, 31);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .box:hover {
@@ -54,5 +65,13 @@
   top: 10px;
   left: 10px;
   z-index: 1;
+  pointer-events: none;
+}
+
+.placed {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
   pointer-events: none;
 }
