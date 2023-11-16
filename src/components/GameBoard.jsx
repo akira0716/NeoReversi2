@@ -16,7 +16,7 @@ let Board = [
   [0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-const mode = "normals";
+const mode = "normal";
 
 const GameBoard = () => {
   const [board, setBoard] = useState(Board);
