@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import "../css/game.css";
 
 import { checkValidMove, putKoma } from "../logic/GameBoard_logic";
-
 import image from "../public/MusoMode.jpg";
+
+import ResultModal from "./ResultModal";
 
 let Board = [
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -21,6 +22,8 @@ const mode = "normal";
 const GameBoard = () => {
   const [board, setBoard] = useState(Board);
   const [player, setPlayer] = useState(1);
+  const [matchOver,setMatchOver] = useState(false);
+
 
   // GPT
   const handleClick = (e) => {
@@ -59,6 +62,26 @@ const GameBoard = () => {
     },
   };
 
+  // ゲーム終了条件を判定するコードを追記
+
+  const isMatchOver = (board, player) => {
+    for (let row = 0; row < board.length; row++) {
+      for (let col = 0; col < board[row].length; col++) {
+        if (board[row][col] === 0 && checkValidMove(board, row, col, player)) {
+          return false; // 置ける場所があればゲーム続行
+        }
+      }
+    }
+    return true; // 置ける場所がない場合、ゲーム終了
+  };
+  
+  useEffect(() => {
+    if (isMatchOver(board, player)) {
+      setMatchOver(true);
+    }
+  }, [board, player]);
+
+  
   return (
     <>
       <div className="board-wrap">
@@ -88,6 +111,9 @@ const GameBoard = () => {
           })}
         </div>
       </div>
+
+      {/* ゲーム終了時のモーダルを表示させる */}
+      {matchOver && <ResultModal />}
     </>
   );
 };
