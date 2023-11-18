@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 const ResultModal = () => {
   // useNavigateで関数を取得する
-  const navigate = useNavigate();
+  const getResult = useNavigate();
 
   // モーダル外がクリックされた時にモーダルを閉じてResult.jsxへ遷移する．
   const handleModalClick = () => {
-    navigate("/Result");
+    getResult("/Result");
   };
 
   return (
