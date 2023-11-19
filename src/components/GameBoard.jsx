@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../css/game.css";
 
 import { checkValidMove, putKoma } from "../logic/GameBoard_logic";
@@ -22,8 +22,8 @@ const mode = "normal";
 const GameBoard = () => {
   const [board, setBoard] = useState(Board);
   const [player, setPlayer] = useState(1);
-  const [matchOver,setMatchOver] = useState(false);
-
+  const [matchOver, setMatchOver] = useState(false);
+  const [counter, setCounter] = useState({ black: 0, white: 0 });
 
   // GPT
   const handleClick = (e) => {
@@ -74,14 +74,31 @@ const GameBoard = () => {
     }
     return true; // 置ける場所がない場合、ゲーム終了
   };
-  
+
   useEffect(() => {
     if (isMatchOver(board, player)) {
       setMatchOver(true);
     }
   }, [board, player]);
 
-  
+  // コマの数をカウントする関数
+  const scoreCounter = (board) => {
+    let black = 0;
+    let white = 0;
+
+    board.forEach((row) => {
+      row.forEach((col) => {
+        if (col === 1) black++;
+        else if (col === 2) white++;
+      });
+    });
+    return { black: black, white: white };
+  };
+
+  useEffect(() => {
+    setCounter(scoreCounter(board));
+  }, [board]);
+
   return (
     <>
       <div className="board-wrap">
@@ -110,6 +127,18 @@ const GameBoard = () => {
             );
           })}
         </div>
+      </div>
+      <div className="mx-12 my-16 text-4xl flex justify-around">
+        <p>
+          player1：
+          <span className="absolute w-9 h-9 bg-black rounded-3xl"></span> 　×
+          {counter.black}
+        </p>
+        <p>
+          player2：
+          <span className="absolute w-9 h-9 bg-white rounded-3xl"></span> 　×
+          {counter.white}
+        </p>
       </div>
 
       {/* ゲーム終了時のモーダルを表示させる */}
