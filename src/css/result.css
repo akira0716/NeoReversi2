@@ -1,10 +1,22 @@
+.result-body {
+  background: #000;
+  padding-top: 20px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .btn-wrap {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 75%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  align-items: center;
+  margin: 40px auto;
+  padding-top: 30px;
+  background: #f3e17865;
+  width: 300px;
+  height: 180px;
+  border-radius: 30px;
 }
 
 .btn2 {
@@ -22,8 +34,8 @@
 }
 
 .btn3 {
-  background: rgb(113, 250, 243);
-  box-shadow: 2px 2px 1px 1px rgb(92, 150, 177);
+  background: rgba(113, 250, 243, 0.5);
+  box-shadow: 2px 2px 1px 1px rgba(92, 150, 177, 0.5);
 }
 
 .onemore {
@@ -38,42 +50,6 @@
   box-shadow: none;
   transform: translateY(2px);
 }
-/* 
-.sample {
-  width: 80px;
-  height: 80px;
-  background: #fff;
-  margin: 80px;
-  border-radius: 50px;
-  transition: transform 2s;
-} */
-/* 
-.sample:hover {
-  transform: rotateY(180deg);
-  background-color: #000;
-  animation: sample 1s;
-}
-
-@keyframes sample {
-  0% {
-    transform: rotateY(0deg);
-    background-color: #fff;
-  }
-  50% {
-    transform: rotateY(90deg);
-    background-color: #fff;
-  }
-  51% {
-    transform: rotateY(90deg);
-    background-color: #000;
-  }
-  100% {
-    transform: rotateY(180deg);
-    background-color: #000;
-  }
-} */
-
-/* Modalのcss */
 
 /* modal.css */
 .modal-overlay {
@@ -89,7 +65,7 @@
 }
 
 .modal-content {
-  background: #fff;
+  background: rgb(156, 156, 156);
   width: 300px;
   height: 300px;
   padding: 20px;
@@ -110,25 +86,141 @@
   gap: 20px;
 }
 
-.result-img-wrap {
-  position: relative;
+.result_container {
+  margin: 60px auto;
+}
+
+.result_wrap-win {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
+  padding-left: 120px;
 }
 
-.result {
+.result_wrap-lose {
+  display: flex;
+  justify-content: center;
+  margin: 80px 0 20px;
+  padding-right: 120px;
+}
+
+.result-img {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-text {
   font-size: 56px;
-  color: #fff;
+  --interval: 1s;
+  display: block;
+  text-shadow:
+    0 0 10px var(--color1),
+    0 0 20px var(--color2),
+    0 0 40px var(--color3);
+
+  will-change: filter, color;
+  filter: saturate(80%);
+  animation: flicker steps(100) var(--interval) 1s infinite;
+  color: yellow;
+  --color1: yellow;
+  --color2: rgb(255, 174, 0);
+  --color3: rgb(119, 128, 0);
+}
+
+.result-wl {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 56px;
+  --interval: 1s;
+  display: block;
+  text-shadow:
+    0 0 10px var(--color1),
+    0 0 20px var(--color2),
+    0 0 40px var(--color3),
+    0 0 80px var(--color4);
+  will-change: filter, color;
+  filter: saturate(60%);
+  animation: flicker steps(100) var(--interval) 1s infinite;
+}
+
+.arrow1 {
+  font-size: 24px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.arrow2 {
+  font-size: 24px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.txt {
+  color: #ffffff;
+  background: #000000;
+  font-size: 60px;
+  font-weight: bold;
+  font-family: Arial;
+  text-transform: uppercase;
+  padding: 0 140px;
+}
+
+.txt.win {
+  padding-left: 160px;
+}
+
+.win::before {
+  content: "WIN";
   position: absolute;
+  mix-blend-mode: difference;
+  filter: blur(3px);
 }
 
-.p1 {
-  top: 26%;
-  left: 52%;
-  transform: translate(-21%, -50%);
+.lose::before {
+  content: "LOSE";
+  position: absolute;
+  mix-blend-mode: difference;
+  filter: blur(3px);
 }
 
-.p2 {
-  top: 34%;
-  left: 41%;
+.neon-wrapper {
+  position: relative;
+  display: inline-flex;
+  filter: brightness(200%);
+  overflow: hidden;
+}
+.gradient {
+  background: linear-gradient(
+    114.5793141156962deg,
+    rgba(6, 227, 250, 1) 4.927083333333334%,
+    rgba(229, 151, 64, 1) 97.84374999999999%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+}
+.dodge {
+  background: radial-gradient(circle, white, black 35%) center / 25% 25%;
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  right: 0;
+  bottom: 0;
+  mix-blend-mode: color-dodge;
+  animation: dodge-area 3s linear infinite;
+}
+
+@keyframes dodge-area {
+  to {
+    transform: translate(50%, 50%);
+  }
 }
