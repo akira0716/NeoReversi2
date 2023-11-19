@@ -1,8 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MusoImg from "../public/muso.png";
+import { getLot } from "../logic/Random_logic";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const onClickRandom = () => {
+    const res = getLot();
+    console.log(res);
+    if (res !== "80%") {
+      navigate("/RandomPage20");
+    } else {
+      console.log("はずれーー");
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <img src={MusoImg} alt="NEO Reversi ～無双～ 2" />
@@ -13,7 +26,9 @@ const Home = () => {
         <button className="btn btn-outline btn-success">2人</button>
         <button className="btn btn-outline btn-success">3人</button>
         <button className="btn btn-outline btn-success">4人</button>
-        <button className="btn btn-outline btn-success">5人</button>
+        <button className="btn btn-outline btn-success" onClick={onClickRandom}>
+          5人
+        </button>
       </div>
 
       <br />
