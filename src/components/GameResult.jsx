@@ -12,9 +12,9 @@ const GameResult = () => {
         <>
           {/* WINの場合の表示 */}
           <div className="neon-wrapper">
-            <span class="txt win">WIN</span>
-            <span class="gradient"></span>
-            <span class="dodge"></span>
+            <span className="txt win">WIN</span>
+            <span className="gradient"></span>
+            <span className="dodge"></span>
           </div>
 
           <div className="result_wrap-win">
@@ -26,9 +26,9 @@ const GameResult = () => {
             <p className="result-text arrow2">＜＜＜＜</p>
           </div>
           <div className="neon-wrapper">
-            <span class="txt lose">LOSE</span>
-            <span class="gradient"></span>
-            <span class="dodge"></span>
+            <span className="txt lose">LOSE</span>
+            <span className="gradient"></span>
+            <span className="dodge"></span>
           </div>
         </>
       ) : (
