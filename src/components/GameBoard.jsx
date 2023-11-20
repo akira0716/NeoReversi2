@@ -1,36 +1,30 @@
 import React, { useState, useEffect } from "react";
 import "../css/game.css";
 
-import { checkValidMove, putKoma } from "../logic/GameBoard_logic";
-import image from "../public/MusoMode.jpg";
+import {
+  checkValidMove,
+  putKoma,
+  isMatchOver,
+  scoreCounter,
+  boardStyle,
+} from "../logic/GameBoard_logic";
 
 import ResultModal from "./ResultModal";
+import { setFireBase } from "../lib/FirebaseAccess";
 
-let Board = [
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 1, 2, 0, 0, 0],
-  [0, 0, 0, 2, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-];
+const mode = "normals";
 
-const mode = "normal";
+const GameBoard = (props) => {
+  const { board, setBoard, player, setPlayer } = props;
 
-const GameBoard = () => {
-  const [board, setBoard] = useState(Board);
-  const [player, setPlayer] = useState(1);
-  const [matchOver, setMatchOver] = useState(false);
-  const [counter, setCounter] = useState({ black: 0, white: 0 });
+  const [matchOver, setMatchOver] = useState(false); // 宮ちゃん
+  const [counter, setCounter] = useState({ black: 0, white: 0 }); //ゆーり
 
-  // GPT
   const handleClick = (e) => {
     const row = Number(e.target.getAttribute("data-row"));
     const col = Number(e.target.getAttribute("data-column"));
 
-    if (board[row][col] !== 0) {
+    if (board[row].state[col] !== 0) {
       return;
     }
 
@@ -39,61 +33,22 @@ const GameBoard = () => {
       return;
     }
 
-    // クリックしたセルに自分の石を置く
-    const newBoard = [...board];
-    newBoard[row][col] = player;
-    setBoard(newBoard);
-
     // 相手の石を挟む処理
-    checkValidMove(newBoard, row, col, player, true);
+    setBoard(checkValidMove(board, row, col, player.turn, true));
+
+    board.map((data, index) => {
+      setFireBase("board", String(index + 1), data);
+    });
 
     // プレイヤーを切り替える
-    setPlayer(player === 1 ? 2 : 1);
-  };
-
-  const boardStyle = {
-    normal: {
-      backgroundColor: "rgb(3, 157, 31)",
-    },
-    muso: {
-      backgroundImage: `url(${image})`,
-      objectFit: "cover",
-      backgroundSize: "cover",
-    },
-  };
-
-  // ゲーム終了条件を判定するコードを追記
-
-  const isMatchOver = (board, player) => {
-    for (let row = 0; row < board.length; row++) {
-      for (let col = 0; col < board[row].length; col++) {
-        if (board[row][col] === 0 && checkValidMove(board, row, col, player)) {
-          return false; // 置ける場所があればゲーム続行
-        }
-      }
-    }
-    return true; // 置ける場所がない場合、ゲーム終了
+    setPlayer(player.turn === 1 ? { turn: 2 } : { turn: 1 });
   };
 
   useEffect(() => {
-    if (isMatchOver(board, player)) {
+    if (isMatchOver(board, player.turn)) {
       setMatchOver(true);
     }
   }, [board, player]);
-
-  // コマの数をカウントする関数
-  const scoreCounter = (board) => {
-    let black = 0;
-    let white = 0;
-
-    board.forEach((row) => {
-      row.forEach((col) => {
-        if (col === 1) black++;
-        else if (col === 2) white++;
-      });
-    });
-    return { black: black, white: white };
-  };
 
   useEffect(() => {
     setCounter(scoreCounter(board));
@@ -118,8 +73,14 @@ const GameBoard = () => {
                       data-column={columnIndex}
                       onClick={handleClick}
                     >
-                      {putKoma(board[rowIndex][columnIndex])}
-                      {checkValidMove(board, rowIndex, columnIndex, player)}
+                      {board.length > 0 &&
+                        putKoma(board[rowIndex].state[columnIndex])}
+                      {checkValidMove(
+                        board,
+                        rowIndex,
+                        columnIndex,
+                        player.turn
+                      )}
                     </div>
                   );
                 })}
