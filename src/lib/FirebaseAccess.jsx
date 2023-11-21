@@ -1,43 +1,109 @@
 import db from "../firebase";
 import {
   collection,
+  getDoc,
   getDocs,
   onSnapshot,
   doc,
   updateDoc,
+  setDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import "firebase/firestore";
 
-export const getFirebase = (tableName, setData) => {
-  const data = collection(db, tableName);
-  getDocs(data).then((snapShot) => {
-    setData(snapShot.docs.map((doc) => ({ ...doc.data() })));
-  });
-};
-
-export const realTimeGet = (tableName, setData) => {
-  onSnapshot(collection(db, tableName), (post) => {
+// Board - リアルタイム取得
+export const realTimeGet = (roomId, setData) => {
+  const boardRef = collection(db, "rooms", roomId, "board");
+  onSnapshot(boardRef, (post) => {
     setData(post.docs.map((doc) => ({ ...doc.data() })));
   });
 };
 
-export const realTimeGet2 = (tableName, setData, id = 1) => {
-  onSnapshot(collection(db, tableName), (post) => {
-    let datas = post.docs.map((doc, index) => {
-      if (id === index + 1) {
-        return doc.data();
-      }
-    });
-    setData(datas[0]);
+// GameInfo - リアルタイム取得
+export const realTimeGet2 = (roomId, setData) => {
+  onSnapshot(doc(db, "rooms", roomId), (post) => {
+    setData(post.data());
   });
 };
 
-export const setFireBase = (tableName, document, data) => {
-  const docRef = doc(collection(db, tableName), document);
-
+// Board - 更新
+export const updateBoard = (roomId, board) => {
   try {
-    updateDoc(docRef, data);
+    board.map((data, index) => {
+      const boardRef = doc(db, "rooms", roomId, "board", String(index + 1));
+      updateDoc(boardRef, data);
+    });
   } catch (err) {
     console.log(err);
   }
+};
+
+// GameInfo - 更新
+export const updateGameInfo = (roomId, gameInfo) => {
+  try {
+    const gameInfoRef = doc(collection(db, "rooms"), roomId);
+    updateDoc(gameInfoRef, gameInfo);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// ルームの作成
+export const createRoom = (roomId = "1", board, gameInfo) => {
+  // Board - 作成
+  try {
+    board.map((data, index) => {
+      const boardRef = doc(db, "rooms", roomId, "board", String(index + 1));
+      setDoc(boardRef, data);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
+  // GameInfo - 作成
+  try {
+    const turnRef = doc(collection(db, "rooms"), roomId);
+    setDoc(turnRef, gameInfo);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// ルームの削除
+export const deleteRoom = (roomId = "") => {
+  // Board - 削除
+  try {
+    for (let i = 0; i < 8; i++) {
+      const boardRef = doc(db, "rooms", roomId, "board", String(i + 1));
+      deleteDoc(boardRef);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
+  // GameInfo - 削除
+  try {
+    const turnRef = doc(collection(db, "rooms"), roomId);
+    deleteDoc(turnRef);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Board 取得(いらない)
+export const getRoomData = (roomId = "") => {
+  const boardRef = collection(db, "rooms", roomId, "board");
+  getDocs(boardRef).then((snapShot) => {
+    // setData(snapShot.docs.map((doc) => ({ ...doc.data() })));
+    console.log(snapShot.docs.map((doc) => ({ ...doc.data() })));
+  });
+};
+
+// GameInfo - 取得(いらない)
+export const getGameInfo = (roomId = "", infoKind = "") => {
+  const turnRef = doc(db, "rooms", roomId);
+  getDoc(turnRef).then((snapShot) => {
+    // setData(snapShot.docs.map((doc) => ({ ...doc.data() })));
+    console.log(snapShot.data()[infoKind]);
+  });
 };

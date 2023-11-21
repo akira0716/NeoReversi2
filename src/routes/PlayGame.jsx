@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import GameBoard from "../components/GameBoard";
 
-import { realTimeGet, realTimeGet2, setFireBase } from "../lib/FirebaseAccess";
+import {
+  realTimeGet,
+  realTimeGet2,
+  updateBoard,
+  updateGameInfo,
+} from "../lib/FirebaseAccess";
 
-let Board = [
+const Board = [
   { state: [0, 0, 0, 0, 0, 0, 0, 0] },
   { state: [0, 0, 0, 0, 0, 0, 0, 0] },
   { state: [0, 0, 0, 0, 0, 0, 0, 0] },
@@ -12,22 +17,24 @@ let Board = [
   { state: [0, 0, 0, 0, 0, 0, 0, 0] },
   { state: [0, 0, 0, 0, 0, 0, 0, 0] },
   { state: [0, 0, 0, 0, 0, 0, 0, 0] },
-];
+]; // GameTitleまたは、libフォルダに置いてimport
+
+const GameInfoInit = {
+  turn: 1,
+};
 
 const PlayGame = () => {
   const [board, setBoard] = useState([]);
-  const [player, setPlayer] = useState({ turn: 1 });
+  const [gameInfo, setGameInfo] = useState({}); //playerの代わりにゲーム情報を管理
 
   useEffect(() => {
-    setFireBase("master", "1", player);
-  }, [player]);
+    updateGameInfo("roomA", gameInfo);
+  }, [gameInfo]);
 
   useEffect(() => {
-    Board.map((data, index) => {
-      setFireBase("board", String(index + 1), data);
-    });
-    realTimeGet("board", setBoard);
-    realTimeGet2("master", setPlayer);
+    updateBoard("roomA", Board); // ゲーム終了時に、部屋を削除するため初期化はいらないかも。
+    realTimeGet("roomA", setBoard);
+    realTimeGet2("roomA", setGameInfo);
   }, []);
 
   return (
@@ -36,9 +43,11 @@ const PlayGame = () => {
         <GameBoard
           board={[...board]}
           setBoard={setBoard}
-          player={player && player}
-          setPlayer={setPlayer}
+          player={gameInfo.turn}
+          gameInfo={gameInfo}
+          setGameInfo={setGameInfo}
         />
+        {/* Todo : roomIdをpropsに追加（稲次） */}
       </div>
     </>
   );

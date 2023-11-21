@@ -10,12 +10,13 @@ import {
 } from "../logic/GameBoard_logic";
 
 import ResultModal from "./ResultModal";
-import { setFireBase } from "../lib/FirebaseAccess";
+import { updateBoard } from "../lib/FirebaseAccess";
 
-const mode = "normals";
+const mode = "normal";
 
+// Todo : roomIdをpropsに追加（稲次）
 const GameBoard = (props) => {
-  const { board, setBoard, player, setPlayer } = props;
+  const { board, setBoard, player, gameInfo, setGameInfo } = props;
 
   const [matchOver, setMatchOver] = useState(false); // 宮ちゃん
   const [counter, setCounter] = useState({ black: 0, white: 0 }); //ゆーり
@@ -34,18 +35,17 @@ const GameBoard = (props) => {
     }
 
     // 相手の石を挟む処理
-    setBoard(checkValidMove(board, row, col, player.turn, true));
+    setBoard(checkValidMove(board, row, col, player, true));
 
-    board.map((data, index) => {
-      setFireBase("board", String(index + 1), data);
-    });
+    // boardの更新
+    updateBoard("roomA", board);
 
     // プレイヤーを切り替える
-    setPlayer(player.turn === 1 ? { turn: 2 } : { turn: 1 });
+    setGameInfo({ ...gameInfo, ["turn"]: player === 1 ? 2 : 1 });
   };
 
   useEffect(() => {
-    if (isMatchOver(board, player.turn)) {
+    if (isMatchOver(board, player)) {
       setMatchOver(true);
     }
   }, [board, player]);
@@ -75,12 +75,7 @@ const GameBoard = (props) => {
                     >
                       {board.length > 0 &&
                         putKoma(board[rowIndex].state[columnIndex])}
-                      {checkValidMove(
-                        board,
-                        rowIndex,
-                        columnIndex,
-                        player.turn
-                      )}
+                      {checkValidMove(board, rowIndex, columnIndex, player)}
                     </div>
                   );
                 })}
