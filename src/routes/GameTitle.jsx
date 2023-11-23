@@ -67,7 +67,7 @@ const Home = () => {
             className="btn btn-outline btn-secondary"
             onClick={onClickCreateRoom} // 部屋を立てるボタンをクリックしたときにモーダルを表示
           >
-            部屋を立てる
+            部屋を立てる（仮）
           </button>
           {/* CreateRoomModal コンポーネントを条件付きで表示 */}
           {show && <CreateRoomModal onClose={() => setShow(false)} />}
