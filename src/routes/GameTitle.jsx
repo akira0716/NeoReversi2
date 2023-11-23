@@ -72,7 +72,9 @@ const Home = () => {
           {/* CreateRoomModal コンポーネントを条件付きで表示 */}
           {show && <CreateRoomModal onClose={() => setShow(false)} />}
 
-          <button className="btn btn-outline btn-secondary">部屋に入る</button>
+          <button className="btn btn-outline btn-secondary">
+            部屋に入る（仮）
+          </button>
         </div>
       </div>
 
