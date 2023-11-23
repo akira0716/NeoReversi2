@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MusoImg from "../public/muso.png";
 import { getLot } from "../logic/Random_logic";
+import CreateRoomModal from "../components/CreateRoomModal";
+
+const Board = [
+  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
+  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
+  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
+  { state: [0, 0, 0, 1, 2, 0, 0, 0] },
+  { state: [0, 0, 0, 2, 1, 0, 0, 0] },
+  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
+  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
+  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
+];
+const GameInfoInit = {
+  turn: 1,
+};
+// ↑↑ゲーム作成に必要な情報↑↑
 
 const Home = () => {
   const navigate = useNavigate();
+  const [show, setShow] = useState(false); // モーダル表示のための状態変数
 
   const onClickRandom = () => {
     const res = getLot();
@@ -14,6 +31,10 @@ const Home = () => {
     } else {
       console.log("はずれーー");
     }
+  };
+
+  const onClickCreateRoom = () => {
+    setShow(true);
   };
 
   return (
@@ -35,23 +56,27 @@ const Home = () => {
       <p>モード</p>
       <br />
       <div className="flex space-x-4">
-        <br />
         <button className="btn btn-outline btn-info">いつもの</button>
         <button className="btn btn-outline btn-error">無双</button>
       </div>
 
       <br />
-      <div className="flex">
-        <p>
-          <Link to="/PlayGame">
-            <button className="btn btn-outline btn-primary">
-              Are you ready？？
-            </button>
-          </Link>
-        </p>
+      <div>
+        <div className="flex mb-4 gap-4">
+          <button
+            className="btn btn-outline btn-secondary"
+            onClick={onClickCreateRoom} // 部屋を立てるボタンをクリックしたときにモーダルを表示
+          >
+            部屋を立てる
+          </button>
+          {/* CreateRoomModal コンポーネントを条件付きで表示 */}
+          {show && <CreateRoomModal onClose={() => setShow(false)} />}
+
+          <button className="btn btn-outline btn-secondary">部屋に入る</button>
+        </div>
       </div>
-      <br />
-      <div className="flex">
+
+      <div className="flex mt-6">
         <p>
           <Link to="/Result">
             <button className="btn btn-outline btn-warning">結果画面</button>
