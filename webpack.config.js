@@ -54,7 +54,9 @@ module.exports = {
     }),
   ],
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [{ from: /^\/*/, to: "/index.html" }],
+    },
     static: {
       directory: __dirname + "/dist",
     },
