@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "../css/game.css";
 
 import {
   checkValidMove,
   putKoma,
   isMatchOver,
   scoreCounter,
-  boardStyle,
+  // boardStyle,
 } from "../logic/GameBoard_logic";
 
 import ResultModal from "./ResultModal";
@@ -56,19 +55,16 @@ const GameBoard = (props) => {
 
   return (
     <>
-      <div className="board-wrap">
-        <div
-          className="board"
-          style={mode === "normal" ? boardStyle.normal : boardStyle.muso}
-        >
+      <div className="flex justify-center my-5">
+        <div className="border border-solid border-white">
           {[...Array(8)].map((_, rowIndex) => {
             return (
-              <div key={`row${rowIndex}`} className="row">
+              <div key={`row${rowIndex}`} className="flex h-24">
                 {[...Array(8)].map((_, columnIndex) => {
                   return (
                     <div
                       key={`${rowIndex}${columnIndex}`}
-                      className="box"
+                      className="w-24 border border-solid relative flex justify-center items-center bg-emerald-500 hover:bg-emerald-800"
                       data-row={rowIndex}
                       data-column={columnIndex}
                       onClick={handleClick}

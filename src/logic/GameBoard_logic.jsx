@@ -1,12 +1,15 @@
 import React from "react";
-import image from "../public/MusoMode.jpg";
 
 export const putKoma = (value) => {
   switch (value) {
     case 1:
-      return <div className="koma-kuro"></div>;
+      return (
+        <div className="w-20 h-20 abusolute top-2.5 l-2.5 z-10 rounded-full bg-black"></div>
+      );
     case 2:
-      return <div className="koma-shiro"></div>;
+      return (
+        <div className="w-20 h-20 abusolute top-2.5 l-2.5 z-10 rounded-full bg-white"></div>
+      );
     default:
       break;
   }
@@ -61,7 +64,7 @@ export const checkValidMove = (board, row, col, player, event = false) => {
         if (board[row].state[col] > 0) {
           return null;
         } else {
-          return <div className="placed"></div>;
+          return <div className="w-2.5 h-2.5 rounded-full bg-black/[.5]"></div>;
         }
       }
     }
@@ -105,15 +108,4 @@ export const scoreCounter = (board) => {
     });
   });
   return { black: black, white: white };
-};
-
-export const boardStyle = {
-  normal: {
-    backgroundColor: "rgb(3, 157, 31)",
-  },
-  muso: {
-    backgroundImage: `url(${image})`,
-    objectFit: "cover",
-    backgroundSize: "cover",
-  },
 };
