@@ -29,7 +29,7 @@ const Home = () => {
     if (res !== "80%") {
       navigate("/RandomPage20");
     } else {
-      console.log("はずれーー");
+      navigate("/RandomPage80");
     }
   };
 

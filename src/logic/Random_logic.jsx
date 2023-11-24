@@ -1,6 +1,6 @@
 export const getLot = () => {
   const data = {
-    "20%": 100, // 20%
+    "20%": 20, // 20%
     "80%": 80, // 80%
   };
   const rand = Math.floor(Math.random() * 100);
