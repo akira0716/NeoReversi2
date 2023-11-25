@@ -1,20 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Modal from "../components/Modal";
 import GameResult from "../components/GameResult";
 import "../css/result.css";
+import ModalBase from "../components/ModalBase";
 
 const Result = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div className="result-body">
       <div className="result-container ">
@@ -24,12 +14,15 @@ const Result = () => {
           <Link to="/PlayGame" className="btn2 onemore">
             もっかい
           </Link>
-          <Link onClick={openModal} className="btn2 end">
+          <Link
+            onClick={() => document.getElementById("my_modal_4").showModal()}
+            className="btn2 end"
+          >
             やめたい
           </Link>
         </div>
 
-        {isModalOpen && <Modal closeModal={closeModal} />}
+        <ModalBase kind={2} />
       </div>
     </div>
   );
