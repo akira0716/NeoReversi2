@@ -5,21 +5,6 @@ import { getLot } from "../logic/Random_logic";
 // import CreateRoomModal from "../components/CreateRoomModal";
 import ModalBase from "../components/ModalBase";
 
-const Board = [
-  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
-  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
-  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
-  { state: [0, 0, 0, 1, 2, 0, 0, 0] },
-  { state: [0, 0, 0, 2, 1, 0, 0, 0] },
-  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
-  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
-  { state: [0, 0, 0, 0, 0, 0, 0, 0] },
-];
-const GameInfoInit = {
-  turn: 1,
-};
-// ↑↑ゲーム作成に必要な情報↑↑
-
 const Home = () => {
   const navigate = useNavigate();
   const [modalKind, setModalKind] = useState(0);
