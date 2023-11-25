@@ -97,11 +97,3 @@ export const deleteRoom = (roomId = "") => {
     console.log(err);
   }
 };
-
-// ルーム一覧取得
-export const getRooms = (setData) => {
-  const roomsRef = collection(db, "rooms");
-  getDocs(roomsRef).then((snapShot) => {
-    setData(snapShot.docs.map((doc) => doc.id));
-  });
-};

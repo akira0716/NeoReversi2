@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { createRoom } from "../lib/FirebaseAccess";
+import { useNavigate } from "react-router-dom";
+import { createRoom, realTimeGetRoom } from "../lib/FirebaseAccess";
 
 const Board = [
   { state: [0, 0, 0, 0, 0, 0, 0, 0] },
@@ -17,6 +18,12 @@ const GameInfoInit = {
 
 const CreateRoom = () => {
   const [roomIdData, setRoomIdData] = useState("");
+  const [keepRoomIdData, setKeepRoomIdData] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    realTimeGetRoom(setKeepRoomIdData);
+  }, []);
 
   // ルームID入力時処理
   const hanleInputIdChange = (e) => {
@@ -26,10 +33,15 @@ const CreateRoom = () => {
   // ゲーム開始ボタン押下時処理
   const onClickCreateRoom = () => {
     if (roomIdData === "") {
+      alert("IDを入力してください．");
       return;
+    } else if (keepRoomIdData.includes(roomIdData)) {
+      alert("既に同じIDで部屋が作られています．");
+      return;
+    } else {
+      createRoom(roomIdData, Board, GameInfoInit);
+      navigate("/PlayGame");
     }
-
-    createRoom(roomIdData, Board, GameInfoInit);
   };
 
   return (

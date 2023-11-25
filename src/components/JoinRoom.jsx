@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getRooms, realTimeGetRoom } from "../lib/FirebaseAccess";
+import { realTimeGetRoom } from "../lib/FirebaseAccess";
 
 const JoinRoom = ({ roomId, setRoomId }) => {
   const [rooms, setRooms] = useState([""]);
