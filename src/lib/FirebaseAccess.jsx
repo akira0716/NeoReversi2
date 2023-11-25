@@ -26,6 +26,14 @@ export const realTimeGet2 = (roomId, setData) => {
   });
 };
 
+// roomId - リアルタイム取得
+export const realTimeGetRoom = (setData) => {
+  const roomsRef = collection(db, "rooms");
+  onSnapshot(roomsRef, (post) => {
+    setData(post.docs.map((doc) => doc.id));
+  });
+};
+
 // Board - 更新
 export const updateBoard = (roomId, board) => {
   try {
@@ -90,20 +98,10 @@ export const deleteRoom = (roomId = "") => {
   }
 };
 
-// Board 取得(いらない)
-export const getRoomData = (roomId = "") => {
-  const boardRef = collection(db, "rooms", roomId, "board");
-  getDocs(boardRef).then((snapShot) => {
-    // setData(snapShot.docs.map((doc) => ({ ...doc.data() })));
-    console.log(snapShot.docs.map((doc) => ({ ...doc.data() })));
-  });
-};
-
-// GameInfo - 取得(いらない)
-export const getGameInfo = (roomId = "", infoKind = "") => {
-  const turnRef = doc(db, "rooms", roomId);
-  getDoc(turnRef).then((snapShot) => {
-    // setData(snapShot.docs.map((doc) => ({ ...doc.data() })));
-    console.log(snapShot.data()[infoKind]);
+// ルーム一覧取得
+export const getRooms = (setData) => {
+  const roomsRef = collection(db, "rooms");
+  getDocs(roomsRef).then((snapShot) => {
+    setData(snapShot.docs.map((doc) => doc.id));
   });
 };

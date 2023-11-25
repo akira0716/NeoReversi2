@@ -14,13 +14,22 @@ const Board = [
 const GameInfoInit = {
   turn: 1,
 };
-// ↑↑ゲーム作成に必要な情報↑↑
 
 const CreateRoom = () => {
   const [roomIdData, setRoomIdData] = useState("");
 
+  // ルームID入力時処理
   const hanleInputIdChange = (e) => {
     setRoomIdData(e.target.value);
+  };
+
+  // ゲーム開始ボタン押下時処理
+  const onClickCreateRoom = () => {
+    if (roomIdData === "") {
+      return;
+    }
+
+    createRoom(roomIdData, Board, GameInfoInit);
   };
 
   return (
@@ -40,7 +49,7 @@ const CreateRoom = () => {
           <div>
             <button
               className="btn btn-outline btn-primary"
-              onClick={() => createRoom(roomIdData, Board, GameInfoInit)}
+              onClick={onClickCreateRoom}
             >
               ゲームを開始する
             </button>

@@ -12,11 +12,6 @@ const CreateRoomModal = ({ onClose }) => {
     createRoom(roomId, Board, GameInfoInit);
   };
 
-  // Board情報の取得
-  const boardInfo = () => {
-    getRoomData(roomId, "board");
-  };
-
   const onChangeRoomId = (e) => {
     const roomId = e.target.value;
     setRoomId(roomId);
