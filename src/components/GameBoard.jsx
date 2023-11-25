@@ -5,7 +5,6 @@ import {
   putKoma,
   isMatchOver,
   scoreCounter,
-  // boardStyle,
 } from "../logic/GameBoard_logic";
 
 import ResultModal from "./ResultModal";
@@ -13,9 +12,8 @@ import { updateBoard } from "../lib/FirebaseAccess";
 
 const mode = "normal";
 
-// Todo : roomIdをpropsに追加（稲次）
 const GameBoard = (props) => {
-  const { board, setBoard, player, gameInfo, setGameInfo } = props;
+  const { board, setBoard, player, gameInfo, setGameInfo, me, roomId } = props;
 
   const [matchOver, setMatchOver] = useState(false); // 宮ちゃん
   const [counter, setCounter] = useState({ black: 0, white: 0 }); //ゆーり
@@ -37,7 +35,7 @@ const GameBoard = (props) => {
     setBoard(checkValidMove(board, row, col, player, true));
 
     // boardの更新
-    updateBoard("roomA", board);
+    updateBoard(roomId, board);
 
     // プレイヤーを切り替える
     setGameInfo({ ...gameInfo, ["turn"]: player === 1 ? 2 : 1 });

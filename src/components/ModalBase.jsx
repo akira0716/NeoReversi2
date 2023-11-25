@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import CreateRoom from "./CreateRoom";
 import JoinRoom from "./JoinRoom";
 
-const ModalBase = ({ kind }) => {
+const ModalBase = ({ kind, setMe, setRoomId }) => {
   let content = null;
 
   if (kind === 0) {
-    content = <CreateRoom />;
+    content = <CreateRoom setMe={setMe} setRoomId={setRoomId} />;
   } else if (kind === 1) {
-    content = <JoinRoom />;
+    content = <JoinRoom setMe={setMe} setRoomId={setRoomId} />;
   } else if (kind === 2) {
     // Result画面のモーダル(Todo)
     content = (

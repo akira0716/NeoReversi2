@@ -23,18 +23,21 @@ const GameInfoInit = {
   turn: 1,
 };
 
-const PlayGame = () => {
+const PlayGame = ({ me, roomId }) => {
   const [board, setBoard] = useState([]);
   const [gameInfo, setGameInfo] = useState({}); //playerの代わりにゲーム情報を管理
 
   useEffect(() => {
-    updateGameInfo("roomA", gameInfo);
+    updateGameInfo(roomId, gameInfo);
   }, [gameInfo]);
 
   useEffect(() => {
-    updateBoard("roomA", Board); // ゲーム終了時に、部屋を削除するため初期化はいらないかも。
-    realTimeGet("roomA", setBoard);
-    realTimeGet2("roomA", setGameInfo);
+    updateBoard(roomId, Board); // ゲーム終了時に、部屋を削除するため初期化はいらないかも。
+    realTimeGet(roomId, setBoard);
+    realTimeGet2(roomId, setGameInfo);
+
+    console.log(`私は、プレイヤー${me}です。`);
+    console.log(`ルームID[${roomId}]でプレイします。`);
   }, []);
 
   return (
@@ -46,8 +49,9 @@ const PlayGame = () => {
           player={gameInfo.turn}
           gameInfo={gameInfo}
           setGameInfo={setGameInfo}
+          me={me}
+          roomId={roomId}
         />
-        {/* Todo : roomIdをpropsに追加（稲次） */}
       </div>
     </>
   );

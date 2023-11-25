@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { realTimeGetRoom } from "../lib/FirebaseAccess";
 
-const JoinRoom = ({ roomId, setRoomId }) => {
+const JoinRoom = ({ setMe, setRoomId }) => {
   const [rooms, setRooms] = useState([""]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     realTimeGetRoom(setRooms);
   }, []);
 
   const onClickJoin = (room) => {
+    setMe(2);
     setRoomId(room);
+    navigate("/PlayGame");
   };
 
   return (

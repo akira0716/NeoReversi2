@@ -16,7 +16,7 @@ const GameInfoInit = {
   turn: 1,
 };
 
-const CreateRoom = () => {
+const CreateRoom = ({ setMe, setRoomId }) => {
   const [roomIdData, setRoomIdData] = useState("");
   const [keepRoomIdData, setKeepRoomIdData] = useState([]);
   const navigate = useNavigate();
@@ -39,6 +39,8 @@ const CreateRoom = () => {
       alert("既に同じIDで部屋が作られています．");
       return;
     } else {
+      setMe(1);
+      setRoomId(roomIdData);
       createRoom(roomIdData, Board, GameInfoInit);
       navigate("/PlayGame");
     }

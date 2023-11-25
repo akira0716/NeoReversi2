@@ -5,7 +5,7 @@ import { getLot } from "../logic/Random_logic";
 // import CreateRoomModal from "../components/CreateRoomModal";
 import ModalBase from "../components/ModalBase";
 
-const Home = () => {
+const Home = ({ setMe, setRoomId }) => {
   const navigate = useNavigate();
   const [modalKind, setModalKind] = useState(0);
 
@@ -82,7 +82,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <ModalBase kind={modalKind} />
+      <ModalBase kind={modalKind} setMe={setMe} setRoomId={setRoomId} />
     </>
   );
 };
