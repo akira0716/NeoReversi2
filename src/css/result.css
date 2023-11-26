@@ -1,200 +1,50 @@
-.result-body {
-  background: #000;
-  padding-top: 20px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* result画面ボタン枠の影 */
 
 .btn-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 40px auto;
-  padding-top: 30px;
-  background: #f3e17865;
-  width: 300px;
-  height: 180px;
-  border-radius: 30px;
+  box-shadow: 0px 0px 30px 10px rgb(250, 242, 133);
 }
 
-.btn2 {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  background: rgb(250, 242, 133);
-  width: 200px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 2px 2px 1px 1px #b1a45c;
-  border-radius: 10px;
-}
-
-.btn3 {
-  background: rgba(113, 250, 243, 0.5);
-  box-shadow: 2px 2px 1px 1px rgba(92, 150, 177, 0.5);
-}
-
-.onemore {
-  margin-bottom: 40px;
-}
-
-.btn2:hover {
-  opacity: 0.8;
-}
-
-.btn2:active {
-  box-shadow: none;
-  transform: translateY(2px);
-}
-
-/* modal.css */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background: rgb(156, 156, 156);
-  width: 300px;
-  height: 300px;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.modal-text {
-  font-size: 32px;
-  font-weight: bold;
-  color: #333;
-}
-
-.btn-wrap-modal {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.result_container {
-  margin: 60px auto;
-}
-
-.result_wrap-win {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  padding-left: 120px;
-}
-
-.result_wrap-lose {
-  display: flex;
-  justify-content: center;
-  margin: 80px 0 20px;
-  padding-right: 120px;
-}
-
-.result-img {
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* Playerテキストの影 */
 
 .result-text {
-  font-size: 56px;
-  --interval: 1s;
-  display: block;
   text-shadow:
-    0 0 10px var(--color1),
-    0 0 20px var(--color2),
-    0 0 40px var(--color3);
-
-  will-change: filter, color;
-  filter: saturate(80%);
-  animation: flicker steps(100) var(--interval) 1s infinite;
-  color: yellow;
-  --color1: yellow;
-  --color2: rgb(255, 174, 0);
-  --color3: rgb(119, 128, 0);
-}
-
-.result-wl {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  font-size: 56px;
-  --interval: 1s;
-  display: block;
-  text-shadow:
-    0 0 10px var(--color1),
-    0 0 20px var(--color2),
-    0 0 40px var(--color3),
-    0 0 80px var(--color4);
+    0 0 5px var(--color1),
+    0 0 10px var(--color2),
+    0 0 20px var(--color3);
   will-change: filter, color;
   filter: saturate(60%);
-  animation: flicker steps(100) var(--interval) 1s infinite;
+  --color1: rgb(202, 202, 115);
+  --color2: rgb(255, 174, 0);
+  --color3: rgb(235, 245, 95);
 }
 
-.arrow1 {
-  font-size: 24px;
-  margin-right: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.arrow2 {
-  font-size: 24px;
-  margin-left: 20px;
-  display: flex;
-  align-items: center;
-}
+/* WINとLOSEのネオンデザイン */
 
 .txt {
-  color: #ffffff;
-  background: #000000;
-  font-size: 60px;
-  font-weight: bold;
   font-family: Arial;
-  text-transform: uppercase;
-  padding: 0 140px;
-}
-
-.txt.win {
-  padding-left: 160px;
 }
 
 .win::before {
   content: "WIN";
   position: absolute;
   mix-blend-mode: difference;
-  filter: blur(3px);
+  filter: blur(2px);
 }
 
 .lose::before {
   content: "LOSE";
   position: absolute;
   mix-blend-mode: difference;
-  filter: blur(3px);
+  filter: blur(2px);
 }
 
 .neon-wrapper {
   position: relative;
   display: inline-flex;
-  filter: brightness(200%);
+  filter: brightness(300%);
   overflow: hidden;
 }
+
 .gradient {
   background: linear-gradient(
     114.5793141156962deg,
@@ -208,6 +58,7 @@
   height: 100%;
   mix-blend-mode: multiply;
 }
+
 .dodge {
   background: radial-gradient(circle, white, black 35%) center / 25% 25%;
   position: absolute;
@@ -216,7 +67,7 @@
   right: 0;
   bottom: 0;
   mix-blend-mode: color-dodge;
-  animation: dodge-area 3s linear infinite;
+  animation: dodge-area 4s linear infinite;
 }
 
 @keyframes dodge-area {

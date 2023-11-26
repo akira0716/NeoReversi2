@@ -6,17 +6,20 @@ import ModalBase from "../components/ModalBase";
 
 const Result = () => {
   return (
-    <div className="result-body">
-      <div className="result-container ">
+    <div className="flex justify-center items-center bg-black h-screen">
+      <div>
         <GameResult />
 
-        <div className="btn-wrap">
-          <Link to="/PlayGame" className="btn2 onemore">
+        <div className="btn-wrap  rounded-e-full flex justify-center items-center mx-auto mt-24 bg-yellow-100 shadow-2xl shadow-yellow-600 w-128 h-32 bg-opacity-90">
+          <Link
+            to="/PlayGame"
+            className="btn btn-outline  btn-warning text-2xl "
+          >
             もっかい
           </Link>
           <Link
             onClick={() => document.getElementById("my_modal_4").showModal()}
-            className="btn2 end"
+            className="btn btn-outline btn-warning  text-2xl ml-11"
           >
             やめたい
           </Link>

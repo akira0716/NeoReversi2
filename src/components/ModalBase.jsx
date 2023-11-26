@@ -14,15 +14,21 @@ const ModalBase = ({ kind }) => {
     // Result画面のモーダル(Todo)
     content = (
       <>
-        <p className="modal-text">本当に、</p>
-        <p className="modal-text text-center">いいんだね？</p>
-        <div className="btn-wrap-modal">
-          <Link className="btn2 btn3" to="/PlayGame">
-            やっぱりやる
-          </Link>
-          <Link className="btn2 btn3" to="/">
-            本当にやめる
-          </Link>
+        <div className="bg-clip-border p-8 bg-violet-600 border-4 border-violet-300 border-dashed">
+          <p className="text-3xl text-center font-bold text-stone-100">
+            本当に、
+          </p>
+          <p className="text-3xl text-center font-bold text-stone-100">
+            いいんだね？
+          </p>
+          <div className="btn-wrap-modal">
+            <Link className="btn2 btn3" to="/PlayGame">
+              やっぱりやる
+            </Link>
+            <Link className="btn2 btn3" to="/">
+              本当にやめる
+            </Link>
+          </div>
         </div>
       </>
     );
