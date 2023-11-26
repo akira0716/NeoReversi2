@@ -15,8 +15,9 @@ const NeonText = ({ type, children }) => (
 
 const GameResult = () => {
   const [result, setResult] = useState("win");
-  const player = result === "win" ? "Player1" : "Player2";
-  const playerNumber = result === "win" ? "2" : "1";
+
+// propsで結果を持ってくる
+// 
 
   return (
     <div>
@@ -28,10 +29,10 @@ const GameResult = () => {
             <div className="flex justify-center mt-11">
               <div className="result-text font-extrabold text-yellow-500 text-6xl relative">
                 <div className="absolute inset-0 text-transparent">
-                  ➡{player}
+                  ➡{result === "win" ? "Player1" : "Player2"}
                 </div>
                 <p className="absolute inset-0 text-yellow-100 animate-flicker">
-                  ➡{player}
+                  ➡{result === "win" ? "Player1" : "Player2"}
                 </p>
               </div>
             </div>
@@ -39,10 +40,10 @@ const GameResult = () => {
             <div className="mt-32 w-screen text-center">
               <div className="result-text font-extrabold text-yellow-500 text-6xl relative me-60">
                 <p className="absolute inset-0 text-transparent pe-">
-                  Player{playerNumber}⇦
+                  {result === "win" ? "Player2" : "Player1"}⇦
                 </p>
                 <p className="absolute inset-0 text-yellow-100 animate-flicker">
-                  Player{playerNumber}⇦
+                  {result === "win" ? "Player2" : "Player1"}⇦
                 </p>
               </div>
             </div>
@@ -58,10 +59,10 @@ const GameResult = () => {
             <div className="flex justify-center mt-7">
               <div className="result-text font-extrabold text-yellow-500 text-6xl relative">
                 <div className="absolute inset-0 text-transparent">
-                  ➡{player}
+                  ➡{result === "win" ? "Player2" : "Player1"}
                 </div>
                 <p className="absolute inset-0 text-yellow-100 animate-flicker">
-                  ➡{player}
+                  ➡{result === "win" ? "Player2" : "Player1"}
                 </p>
               </div>
             </div>
@@ -69,10 +70,10 @@ const GameResult = () => {
             <div className="mt-32 w-screen text-center">
               <div className="result-text font-extrabold text-yellow-500 text-6xl relative me-60">
                 <p className="absolute inset-0 text-transparent pe-">
-                  Player{playerNumber}⇦
+                  {result === "win" ? "Player1" : "Player2"}⇦
                 </p>
                 <p className="absolute inset-0 text-yellow-100 animate-flicker">
-                  Player{playerNumber}⇦
+                  {result === "win" ? "Player1" : "Player2"}⇦
                 </p>
               </div>
             </div>
