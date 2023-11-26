@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ModalBase from "./ModalBase";
 
 import {
   checkValidMove,
@@ -58,7 +59,8 @@ const GameBoard = (props) => {
     // どちらも置けない場合
     if (blackFlg && whiteFlg) {
       // 終わり : モーダルのdaisyUI化 ※setMatchOver()いらない。
-      document.getElementById("my_modal_4").showModal();
+      // document.getElementById("my_modal_4").showModal();
+      setMatchOver(true);
     } else if ((blackFlg && player === 1) || (whiteFlg && player === 2)) {
       // 「パス」メッセージを出したい。※ターンが切り替わったことがわからない。
       // ターンの切り替え
@@ -110,8 +112,8 @@ const GameBoard = (props) => {
         </p>
       </div>
       <ModalBase kind={3} setMe={null} setRoomId={null} />
-      {/* ゲーム終了時のモーダルを表示させる */}
-      {/* {matchOver && <ResultModal />} */}
+      ゲーム終了時のモーダルを表示させる
+      {matchOver && <ResultModal />}
     </>
   );
 };
