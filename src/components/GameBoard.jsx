@@ -5,17 +5,13 @@ import {
   putKoma,
   isMatchOver,
   scoreCounter,
-  // boardStyle,
 } from "../logic/GameBoard_logic";
 
 import ResultModal from "./ResultModal";
 import { updateBoard } from "../lib/FirebaseAccess";
 
-const mode = "normal";
-
-// Todo : roomIdをpropsに追加（稲次）
 const GameBoard = (props) => {
-  const { board, setBoard, player, gameInfo, setGameInfo } = props;
+  const { board, setBoard, player, gameInfo, setGameInfo, me, roomId } = props;
 
   const [matchOver, setMatchOver] = useState(false); // 宮ちゃん
   const [counter, setCounter] = useState({ black: 0, white: 0 }); //ゆーり
@@ -24,10 +20,12 @@ const GameBoard = (props) => {
     const row = Number(e.target.getAttribute("data-row"));
     const col = Number(e.target.getAttribute("data-column"));
 
+    // 駒が置いてある場所は置けない。
     if (board[row].state[col] !== 0) {
       return;
     }
 
+    // 置ける判定のマークがない場所には置けない。
     if (e.target.children.length === 0) {
       alert("ココには置けないよ～");
       return;
@@ -37,17 +35,36 @@ const GameBoard = (props) => {
     setBoard(checkValidMove(board, row, col, player, true));
 
     // boardの更新
-    updateBoard("roomA", board);
+    updateBoard(roomId, board);
 
     // プレイヤーを切り替える
     setGameInfo({ ...gameInfo, ["turn"]: player === 1 ? 2 : 1 });
   };
 
   useEffect(() => {
-    if (isMatchOver(board, player)) {
-      setMatchOver(true);
+    let whiteFlg = false;
+    let blackFlg = false;
+
+    // 黒が置けない場合
+    if (isMatchOver(board, 1)) {
+      blackFlg = true;
     }
-  }, [board, player]);
+
+    // 白が置けない場合
+    if (isMatchOver(board, 2)) {
+      whiteFlg = true;
+    }
+
+    // どちらも置けない場合
+    if (blackFlg && whiteFlg) {
+      // 終わり : モーダルのdaisyUI化 ※setMatchOver()いらない。
+      document.getElementById("my_modal_4").showModal();
+    } else if ((blackFlg && player === 1) || (whiteFlg && player === 2)) {
+      // 「パス」メッセージを出したい。※ターンが切り替わったことがわからない。
+      // ターンの切り替え
+      setGameInfo({ ...gameInfo, ["turn"]: player === 1 ? 2 : 1 });
+    }
+  }, [board]);
 
   useEffect(() => {
     setCounter(scoreCounter(board));
@@ -92,9 +109,9 @@ const GameBoard = (props) => {
           {counter.white}
         </p>
       </div>
-
+      <ModalBase kind={3} setMe={null} setRoomId={null} />
       {/* ゲーム終了時のモーダルを表示させる */}
-      {matchOver && <ResultModal />}
+      {/* {matchOver && <ResultModal />} */}
     </>
   );
 };
