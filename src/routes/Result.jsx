@@ -4,7 +4,7 @@ import GameResult from "../components/GameResult";
 import "../css/result.css";
 import ModalBase from "../components/ModalBase";
 
-const Result = () => {
+const Result = ({ roomId }) => {
   return (
     <div className="flex justify-center items-center bg-black h-screen">
       <div>
@@ -29,7 +29,7 @@ const Result = () => {
           </Link>
         </div>
 
-        <ModalBase kind={2} />
+        <ModalBase kind={2} roomId={roomId} />
       </div>
     </div>
   );

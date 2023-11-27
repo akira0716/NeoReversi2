@@ -23,7 +23,7 @@ const App = () => {
           path="/PlayGame"
           element={<PlayGame me={me} roomId={roomId} />}
         />
-        <Route path="/Result" element={<Result />} />
+        <Route path="/Result" element={<Result roomId={roomId} />} />
         <Route path="/RandomPage20" element={<RandomPage20 />} />
         <Route path="/RandomPage80" element={<RandomPage80 />} />
       </Routes>
