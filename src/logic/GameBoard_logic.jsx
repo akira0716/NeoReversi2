@@ -64,7 +64,9 @@ export const checkValidMove = (board, row, col, player, event = false) => {
         if (board[row].state[col] > 0) {
           return null;
         } else {
-          return <div className="w-2.5 h-2.5 rounded-full bg-black/[.5]"></div>;
+          return (
+            <div className="w-2.5 h-2.5 rounded-full bg-black/[.5] pointer-events-none"></div>
+          );
         }
       }
     }

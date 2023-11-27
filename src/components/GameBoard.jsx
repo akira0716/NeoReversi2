@@ -18,6 +18,11 @@ const GameBoard = (props) => {
   const [counter, setCounter] = useState({ black: 0, white: 0 }); //ゆーり
 
   const handleClick = (e) => {
+    if (me !== player) {
+      alert("君の番じゃないね？");
+      return;
+    }
+
     const row = Number(e.target.getAttribute("data-row"));
     const col = Number(e.target.getAttribute("data-column"));
 
