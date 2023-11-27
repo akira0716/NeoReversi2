@@ -2,6 +2,7 @@ import React from "react";
 import CreateRoom from "./CreateRoom";
 import JoinRoom from "./JoinRoom";
 import EndGameCheck from "./EndGameCheck";
+import ResultModal from "./ResultModal";
 
 const ModalBase = ({ kind, setMe, setRoomId, roomId }) => {
   let content = null;
@@ -12,8 +13,10 @@ const ModalBase = ({ kind, setMe, setRoomId, roomId }) => {
     content = <JoinRoom setMe={setMe} setRoomId={setRoomId} />;
   } else if (kind === 2) {
     content = <EndGameCheck roomId={roomId} />;
+  } else if (kind === 3) {
+    content = <ResultModal />;
   } else {
-    // 特になし。
+    // なにもなし。
   }
 
   return (

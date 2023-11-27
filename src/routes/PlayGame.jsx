@@ -58,7 +58,6 @@ const PlayGame = ({ me, roomId, setResult }) => {
           setGameInfo={setGameInfo}
           me={me}
           roomId={roomId}
-          matchOver={matchOver}
           setMatchOver={setMatchOver}
         />
         {/* コンポーネント化 */}
