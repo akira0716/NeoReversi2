@@ -11,6 +11,7 @@ import RandomPage80 from "./routes/RandomPage80";
 const App = () => {
   const [roomId, setRoomId] = useState("");
   const [me, setMe] = useState(0);
+  const [result, setResult] = useState("");
 
   return (
     <>
@@ -21,9 +22,12 @@ const App = () => {
         />
         <Route
           path="/PlayGame"
-          element={<PlayGame me={me} roomId={roomId} />}
+          element={<PlayGame me={me} roomId={roomId} setResult={setResult} />}
         />
-        <Route path="/Result" element={<Result roomId={roomId} />} />
+        <Route
+          path="/Result"
+          element={<Result me={me} roomId={roomId} result={result} />}
+        />
         <Route path="/RandomPage20" element={<RandomPage20 />} />
         <Route path="/RandomPage80" element={<RandomPage80 />} />
       </Routes>

@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 import ModalBase from "./ModalBase";
 
-import {
-  checkValidMove,
-  putKoma,
-  isMatchOver,
-  scoreCounter,
-} from "../logic/GameBoard_logic";
+import { checkValidMove, putKoma, isMatchOver } from "../logic/GameBoard_logic";
 
 import ResultModal from "./ResultModal";
 import { updateBoard } from "../lib/FirebaseAccess";
 
 const GameBoard = (props) => {
-  const { board, setBoard, player, gameInfo, setGameInfo, me, roomId } = props;
-
-  const [matchOver, setMatchOver] = useState(false); // 宮ちゃん
-  const [counter, setCounter] = useState({ black: 0, white: 0 }); //ゆーり
+  const {
+    board,
+    setBoard,
+    player,
+    gameInfo,
+    setGameInfo,
+    me,
+    roomId,
+    matchOver,
+    setMatchOver,
+  } = props;
 
   const handleClick = (e) => {
     if (me !== player) {
@@ -63,7 +65,7 @@ const GameBoard = (props) => {
 
     // どちらも置けない場合
     if (blackFlg && whiteFlg) {
-      // 終わり : モーダルのdaisyUI化 ※setMatchOver()いらない。
+      // 終わり : モーダルのdaisyUI化
       // document.getElementById("my_modal_4").showModal();
       setMatchOver(true);
     } else if ((blackFlg && player === 1) || (whiteFlg && player === 2)) {
@@ -71,10 +73,6 @@ const GameBoard = (props) => {
       // ターンの切り替え
       setGameInfo({ ...gameInfo, ["turn"]: player === 1 ? 2 : 1 });
     }
-  }, [board]);
-
-  useEffect(() => {
-    setCounter(scoreCounter(board));
   }, [board]);
 
   return (
@@ -104,20 +102,8 @@ const GameBoard = (props) => {
           })}
         </div>
       </div>
-      <div className="mx-12 my-16 text-4xl flex justify-around">
-        <p>
-          player1：
-          <span className="absolute w-9 h-9 bg-black rounded-3xl"></span> 　×
-          {counter.black}
-        </p>
-        <p>
-          player2：
-          <span className="absolute w-9 h-9 bg-white rounded-3xl"></span> 　×
-          {counter.white}
-        </p>
-      </div>
-      <ModalBase kind={3} setMe={null} setRoomId={null} />
-      ゲーム終了時のモーダルを表示させる
+      {/* <ModalBase kind={3} setMe={null} setRoomId={null} /> */}
+      {/* ゲーム終了時のモーダルを表示させる */}
       {matchOver && <ResultModal />}
     </>
   );

@@ -4,11 +4,11 @@ import GameResult from "../components/GameResult";
 import "../css/result.css";
 import ModalBase from "../components/ModalBase";
 
-const Result = ({ roomId }) => {
+const Result = ({ me, roomId, result }) => {
   return (
     <div className="flex justify-center items-center bg-black h-screen">
       <div>
-        <GameResult />
+        <GameResult me={me} result={result} />
 
         <div className="btn-wrap  rounded-full flex justify-center items-center mx-auto mt-24 gap-10 bg-yellow-50 shadow-2xl shadow-yellow-600 w-128 h-32">
           <Link

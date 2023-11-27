@@ -13,15 +13,10 @@ const NeonText = ({ type, children }) => (
   </div>
 );
 
-const GameResult = () => {
-  const [result, setResult] = useState("win");
-
-// propsで結果を持ってくる
-// 
-
+const GameResult = ({ me, result }) => {
   return (
     <div>
-      {result === "win" ? (
+      {me === 1 ? (
         <>
           <NeonText type="win">WIN</NeonText>
 
