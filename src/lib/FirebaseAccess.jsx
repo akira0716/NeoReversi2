@@ -32,6 +32,14 @@ export const realTimeGetRoom = (setData) => {
   });
 };
 
+// GameInfo - 参加可能状態取得
+export const realTimeGetRoomState = (setData) => {
+  const roomStateRef = collection(db, "rooms");
+  onSnapshot(roomStateRef, (post) => {
+    setData(post.docs.map((doc) => ({ ...doc.data() })));
+  });
+};
+
 // Board - 更新
 export const updateBoard = (roomId, board) => {
   try {

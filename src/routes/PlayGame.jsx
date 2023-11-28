@@ -10,9 +10,9 @@ import PanelGameInfo from "../components/PanelGameInfo";
 
 const PlayGame = ({ me, roomId, setResult }) => {
   const [board, setBoard] = useState([]);
-  const [gameInfo, setGameInfo] = useState({}); //playerの代わりにゲーム情報を管理
+  const [gameInfo, setGameInfo] = useState({});
   const [counter, setCounter] = useState({ black: 0, white: 0 });
-  const [matchOver, setMatchOver] = useState(false); // 宮ちゃん
+  const [matchOver, setMatchOver] = useState(false);
 
   useEffect(() => {
     updateGameInfo(roomId, gameInfo);

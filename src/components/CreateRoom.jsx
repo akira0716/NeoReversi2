@@ -14,6 +14,7 @@ const Board = [
 ];
 const GameInfoInit = {
   turn: 1,
+  roomState: true,
 };
 
 const CreateRoom = ({ setMe, setRoomId }) => {

@@ -16,6 +16,10 @@ const GameBoard = (props) => {
   } = props;
 
   const handleClick = (e) => {
+    if (me === 3) {
+      return;
+    }
+
     if (me !== player) {
       alert("君の番じゃないね？");
       return;
