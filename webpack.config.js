@@ -50,7 +50,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: __dirname + "/src/index.html",
       // Setting favicon path.
-      favicon: "./src/public/favicon.ico",
+      favicon: "./src/public/reversi2icon.ico",
     }),
   ],
   devServer: {
