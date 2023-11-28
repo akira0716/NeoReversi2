@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import ModalBase from "./ModalBase";
-
 import { checkValidMove, putKoma, isMatchOver } from "../logic/GameBoard_logic";
-
-import ResultModal from "./ResultModal";
 import { updateBoard } from "../lib/FirebaseAccess";
 
 const GameBoard = (props) => {
@@ -64,9 +61,8 @@ const GameBoard = (props) => {
 
     // どちらも置けない場合
     if (blackFlg && whiteFlg) {
-      // 終わり : モーダルのdaisyUI化
-      document.getElementById("my_modal_4").showModal();
-      setMatchOver(true);
+      document.getElementById("my_modal_4").showModal(); // ゲーム終了モーダル表示
+      setMatchOver(true); // ゲーム終了通知
     } else if ((blackFlg && player === 1) || (whiteFlg && player === 2)) {
       // 「パス」メッセージを出したい。※ターンが切り替わったことがわからない。
       // ターンの切り替え

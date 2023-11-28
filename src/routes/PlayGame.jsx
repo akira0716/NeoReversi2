@@ -3,10 +3,10 @@ import GameBoard from "../components/GameBoard";
 import {
   realTimeGet,
   realTimeGet2,
-  updateBoard,
   updateGameInfo,
 } from "../lib/FirebaseAccess";
 import { scoreCounter } from "../logic/GameBoard_logic";
+import PanelGameInfo from "../components/PanelGameInfo";
 
 const PlayGame = ({ me, roomId, setResult }) => {
   const [board, setBoard] = useState([]);
@@ -42,14 +42,11 @@ const PlayGame = ({ me, roomId, setResult }) => {
   useEffect(() => {
     realTimeGet(roomId, setBoard);
     realTimeGet2(roomId, setGameInfo);
-
-    console.log(`私は、プレイヤー${me}です。`);
-    console.log(`ルームID[${roomId}]でプレイします。`);
   }, []);
 
   return (
     <>
-      <div>
+      <div className="flex justify-center">
         <GameBoard
           board={[...board]}
           setBoard={setBoard}
@@ -60,19 +57,7 @@ const PlayGame = ({ me, roomId, setResult }) => {
           roomId={roomId}
           setMatchOver={setMatchOver}
         />
-        {/* コンポーネント化 */}
-        <div className="mx-12 my-16 text-4xl flex justify-around">
-          <p>
-            player1：
-            <span className="absolute w-9 h-9 bg-black rounded-3xl"></span> 　×
-            {counter.black}
-          </p>
-          <p>
-            player2：
-            <span className="absolute w-9 h-9 bg-white rounded-3xl"></span> 　×
-            {counter.white}
-          </p>
-        </div>
+        <PanelGameInfo player={gameInfo.turn} me={me} counter={counter} />
       </div>
     </>
   );
