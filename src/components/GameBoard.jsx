@@ -15,6 +15,11 @@ const GameBoard = (props) => {
     setMatchOver,
   } = props;
 
+  // ルーム削除時のエラー対策
+  if (board === null) {
+    return;
+  }
+
   const handleClick = (e) => {
     if (me === 3) {
       return;
