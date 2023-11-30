@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 interface PanelGameInfoProps {
   player: number;
   me: number;
-  counter: number;
+  counter: CounterColorProps;
+}
+
+interface CounterColorProps {
+  black: number;
+  white: number;
 }
 
 const PanelGameInfo: React.FC<PanelGameInfoProps> = ({

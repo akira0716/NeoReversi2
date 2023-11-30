@@ -1,21 +1,46 @@
 import React from "react";
 
-export const putKoma = (value) => {
+interface Cell {
+  row: number;
+  col: number;
+}
+
+interface BoardState {
+  state: number[];
+}
+
+interface Board {
+  length: number;
+  [index: number]: BoardState;
+}
+
+interface Score {
+  black: number;
+  white: number;
+}
+
+export const putKoma = (value: number): React.ReactNode => {
   switch (value) {
     case 1:
       return (
-        <div className="w-20 h-20 abusolute top-2.5 l-2.5 z-10 rounded-full bg-black"></div>
+        <div className="w-20 h-20 absolute top-2.5 left-2.5 z-10 rounded-full bg-black"></div>
       );
     case 2:
       return (
-        <div className="w-20 h-20 abusolute top-2.5 l-2.5 z-10 rounded-full bg-white"></div>
+        <div className="w-20 h-20 absolute top-2.5 left-2.5 z-10 rounded-full bg-white"></div>
       );
     default:
-      break;
+      return null;
   }
 };
 
-export const checkValidMove = (board, row, col, player, event = false) => {
+export const checkValidMove = (
+  board: Board,
+  row: number,
+  col: number,
+  player: number,
+  event = false
+): React.ReactNode | null => {
   const directions = [
     { row: -1, col: 0 }, // 上
     { row: 1, col: 0 }, // 下
@@ -31,7 +56,7 @@ export const checkValidMove = (board, row, col, player, event = false) => {
     const { row: dirRow, col: dirCol } = direction;
     let currentRow = row + dirRow;
     let currentCol = col + dirCol;
-    let flipCells = [];
+    let flipCells: Cell[] = [];
 
     // 相手の石が続く限り探索
     while (
@@ -77,10 +102,12 @@ export const checkValidMove = (board, row, col, player, event = false) => {
 
     return board;
   }
+
+  return null;
 };
 
 // ゲーム終了時判定
-export const isMatchOver = (board, player) => {
+export const isMatchOver = (board: Board, player: number): boolean => {
   if (board.length === 0) {
     return false;
   }
@@ -89,7 +116,7 @@ export const isMatchOver = (board, player) => {
     for (let col = 0; col < board[row].state.length; col++) {
       if (
         board[row].state[col] === 0 &&
-        checkValidMove(board, row, col, player)
+        checkValidMove(board, row, col, player) !== null
       ) {
         return false; // 置ける場所があればゲーム続行
       }
@@ -99,7 +126,7 @@ export const isMatchOver = (board, player) => {
 };
 
 // コマの数をカウントする関数
-export const scoreCounter = (board) => {
+export const scoreCounter = (board: Board): Score => {
   let black = 0;
   let white = 0;
 
@@ -109,5 +136,5 @@ export const scoreCounter = (board) => {
       else if (col === 2) white++;
     });
   });
-  return { black: black, white: white };
+  return { black, white };
 };

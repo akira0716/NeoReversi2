@@ -78,7 +78,7 @@ export const updateGameInfo = (roomId: String, gameInfo: any) => {
 };
 
 // ルームの作成
-export const createRoom = (roomId = "1", board: never, gameInfo: any) => {
+export const createRoom = (roomId = "1", board: any, gameInfo: any) => {
   // Board - 作成
   try {
     board.map((data: any, index: number) => {
