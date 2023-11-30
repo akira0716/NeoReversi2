@@ -7,25 +7,32 @@ import {
   setDoc,
   deleteDoc,
 } from "firebase/firestore";
-import "firebase/firestore";
 
 // Board - リアルタイム取得
-export const realTimeGet = (roomId, setData) => {
-  const boardRef = collection(db, "rooms", roomId, "board");
+export const realTimeGet = (
+  roomId: String,
+  setData: React.Dispatch<React.SetStateAction<any[]>>
+) => {
+  const boardRef = collection(db, "rooms", String(roomId), "board");
   onSnapshot(boardRef, (post) => {
     setData(post.docs.map((doc) => ({ ...doc.data() })));
   });
 };
 
 // GameInfo - リアルタイム取得
-export const realTimeGet2 = (roomId, setData) => {
-  onSnapshot(doc(db, "rooms", roomId), (post) => {
+export const realTimeGet2 = (
+  roomId: String,
+  setData: React.Dispatch<React.SetStateAction<any | undefined>>
+) => {
+  onSnapshot(doc(db, "rooms", String(roomId)), (post) => {
     setData(post.data());
   });
 };
 
 // roomId - リアルタイム取得
-export const realTimeGetRoom = (setData) => {
+export const realTimeGetRoom = (
+  setData: React.Dispatch<React.SetStateAction<any[]>>
+) => {
   const roomsRef = collection(db, "rooms");
   onSnapshot(roomsRef, (post) => {
     setData(post.docs.map((doc) => doc.id));
@@ -33,7 +40,9 @@ export const realTimeGetRoom = (setData) => {
 };
 
 // GameInfo - 参加可能状態取得
-export const realTimeGetRoomState = (setData) => {
+export const realTimeGetRoomState = (
+  setData: React.Dispatch<React.SetStateAction<any[]>>
+) => {
   const roomStateRef = collection(db, "rooms");
   onSnapshot(roomStateRef, (post) => {
     setData(post.docs.map((doc) => ({ ...doc.data() })));
@@ -41,10 +50,16 @@ export const realTimeGetRoomState = (setData) => {
 };
 
 // Board - 更新
-export const updateBoard = (roomId, board) => {
+export const updateBoard = (roomId: String, board: any) => {
   try {
-    board.map((data, index) => {
-      const boardRef = doc(db, "rooms", roomId, "board", String(index + 1));
+    board.map((data: any, index: number) => {
+      const boardRef = doc(
+        db,
+        "rooms",
+        String(roomId),
+        "board",
+        String(index + 1)
+      );
       updateDoc(boardRef, data);
     });
   } catch (err) {
@@ -53,7 +68,7 @@ export const updateBoard = (roomId, board) => {
 };
 
 // GameInfo - 更新
-export const updateGameInfo = (roomId, gameInfo) => {
+export const updateGameInfo = (roomId: String, gameInfo: any) => {
   try {
     const gameInfoRef = doc(collection(db, "rooms"), roomId);
     updateDoc(gameInfoRef, gameInfo);
@@ -63,10 +78,10 @@ export const updateGameInfo = (roomId, gameInfo) => {
 };
 
 // ルームの作成
-export const createRoom = (roomId = "1", board, gameInfo) => {
+export const createRoom = (roomId = "1", board: never, gameInfo: any) => {
   // Board - 作成
   try {
-    board.map((data, index) => {
+    board.map((data: any, index: number) => {
       const boardRef = doc(db, "rooms", roomId, "board", String(index + 1));
       setDoc(boardRef, data);
     });

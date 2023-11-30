@@ -4,7 +4,19 @@ import JoinRoom from "./JoinRoom";
 import EndGameCheck from "./EndGameCheck";
 import ResultModal from "./ResultModal";
 
-const ModalBase = ({ kind, setMe, setRoomId, roomId }) => {
+interface ModalBaseProps {
+  kind: number;
+  setMe: React.Dispatch<React.SetStateAction<number>>;
+  setRoomId: React.Dispatch<React.SetStateAction<string>>;
+  roomId: string;
+}
+
+const ModalBase: React.FC<ModalBaseProps> = ({
+  kind,
+  setMe,
+  setRoomId,
+  roomId,
+}) => {
   let content = null;
 
   if (kind === 0) {

@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PanelGameInfo = ({ player, me, counter }) => {
+interface PanelGameInfoProps {
+  player: number;
+  me: number;
+  counter: number;
+}
+
+const PanelGameInfo: React.FC<PanelGameInfoProps> = ({
+  player,
+  me,
+  counter,
+}) => {
   return (
     <>
       <div className="mx-5 my-5 text-4xl">

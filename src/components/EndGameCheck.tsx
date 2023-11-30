@@ -2,7 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { deleteRoom } from "../lib/FirebaseAccess";
 
-const EndGameCheck = ({ roomId }) => {
+interface EndGameCheckProps {
+  roomId: string;
+}
+
+const EndGameCheck: React.FC<EndGameCheckProps> = ({ roomId }) => {
   // ルーム削除
   const onClickEnd = () => {
     deleteRoom(roomId);

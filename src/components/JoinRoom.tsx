@@ -6,7 +6,12 @@ import {
   updateGameInfo,
 } from "../lib/FirebaseAccess";
 
-const JoinRoom = ({ setMe, setRoomId }) => {
+interface JoinRoomProps {
+  setMe: React.Dispatch<React.SetStateAction<number>>;
+  setRoomId: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const JoinRoom: React.FC<JoinRoomProps> = ({ setMe, setRoomId }) => {
   const [rooms, setRooms] = useState([""]);
   const [gameInfo, setGameInfo] = useState({});
 
@@ -18,7 +23,7 @@ const JoinRoom = ({ setMe, setRoomId }) => {
   }, []);
 
   // プレイヤー2として参加
-  const onClickJoin = (room) => {
+  const onClickJoin = (room: string) => {
     updateGameInfo(room, { roomState: false });
     setMe(2);
     setRoomId(room);
@@ -26,14 +31,14 @@ const JoinRoom = ({ setMe, setRoomId }) => {
   };
 
   // 観戦者として参加
-  const onClickWatching = (room) => {
+  const onClickWatching = (room: string) => {
     setMe(3);
     setRoomId(room);
     navigate("/PlayGame");
   };
 
   // 参加可能なルームかチェック
-  const JoinableCheck = (index, gameInfo) => {
+  const JoinableCheck = (index: number, gameInfo: any) => {
     let result = false;
 
     if (gameInfo.length > 0) {

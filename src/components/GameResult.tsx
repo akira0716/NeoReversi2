@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "../css/result.css";
 
-const NeonText = ({ type, children }) => (
+interface NeonTextProps {
+  type: String;
+  children: React.ReactNode;
+}
+
+interface GameResultProps {
+  me: number;
+  result: String;
+}
+
+const NeonText: React.FC<NeonTextProps> = ({ type, children }) => (
   <div className="text-center">
     <div className="neon-wrapper">
       <span className={`txt ${type} text-6xl font-bold bg-black`}>
@@ -13,7 +23,7 @@ const NeonText = ({ type, children }) => (
   </div>
 );
 
-const GameResult = ({ me, result }) => {
+const GameResult: React.FC<GameResultProps> = ({ me, result }) => {
   return (
     <div>
       {me === 1 ? (

@@ -3,24 +3,33 @@ import ModalBase from "./ModalBase";
 import { checkValidMove, putKoma, isMatchOver } from "../logic/GameBoard_logic";
 import { updateBoard } from "../lib/FirebaseAccess";
 
-const GameBoard = (props) => {
-  const {
-    board,
-    setBoard,
-    player,
-    gameInfo,
-    setGameInfo,
-    me,
-    roomId,
-    setMatchOver,
-  } = props;
+interface GameBoardProps {
+  board: any;
+  setBoard: React.Dispatch<React.SetStateAction<any>>;
+  player: number;
+  gameInfo: any;
+  setGameInfo: React.Dispatch<React.SetStateAction<any>>;
+  me: number;
+  roomId: string;
+  setMatchOver: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+const GameBoard: React.FC<GameBoardProps> = ({
+  board,
+  setBoard,
+  player,
+  gameInfo,
+  setGameInfo,
+  me,
+  roomId,
+  setMatchOver,
+}: GameBoardProps) => {
   // ルーム削除時のエラー対策
   if (board === null) {
-    return;
+    return null;
   }
 
-  const handleClick = (e) => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (me === 3) {
       return;
     }
@@ -30,8 +39,8 @@ const GameBoard = (props) => {
       return;
     }
 
-    const row = Number(e.target.getAttribute("data-row"));
-    const col = Number(e.target.getAttribute("data-column"));
+    const row = Number(e.currentTarget.getAttribute("data-row"));
+    const col = Number(e.currentTarget.getAttribute("data-column"));
 
     // 駒が置いてある場所は置けない。
     if (board[row].state[col] !== 0) {
@@ -39,7 +48,7 @@ const GameBoard = (props) => {
     }
 
     // 置ける判定のマークがない場所には置けない。
-    if (e.target.children.length === 0) {
+    if (e.currentTarget.children.length === 0) {
       alert("ココには置けないよ～");
       return;
     }
@@ -70,7 +79,7 @@ const GameBoard = (props) => {
 
     // どちらも置けない場合
     if (blackFlg && whiteFlg) {
-      document.getElementById("my_modal_4").showModal(); // ゲーム終了モーダル表示
+      (document.getElementById("my_modal_4") as HTMLDialogElement).showModal(); // ゲーム終了モーダル表示
       setMatchOver(true); // ゲーム終了通知
     } else if ((blackFlg && player === 1) || (whiteFlg && player === 2)) {
       // 「パス」メッセージを出したい。※ターンが切り替わったことがわからない。
