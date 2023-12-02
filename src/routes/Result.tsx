@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import GameResult from "../components/GameResult";
 import "../css/result.css";
 import ModalBase from "../components/ModalBase";
 
-const Result = ({ me, roomId, result }) => {
+interface ResultProps {
+  me: number;
+  roomId: string;
+  result: string;
+}
+
+const Result: React.FC<ResultProps> = ({ me, roomId, result }) => {
   return (
     <div className="flex justify-center items-center bg-black h-screen">
       <div>
@@ -19,7 +25,7 @@ const Result = ({ me, roomId, result }) => {
               もっかい
             </span>
           </Link>
-          <Link
+          <button
             onClick={() =>
               (
                 document.getElementById("my_modal_4") as HTMLDialogElement
@@ -30,13 +36,21 @@ const Result = ({ me, roomId, result }) => {
             <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
               やめたい
             </span>
-          </Link>
+          </button>
         </div>
 
-        <ModalBase kind={2} roomId={roomId} />
+        <ModalBase
+          kind={2}
+          roomId={roomId}
+          setMe={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+          setRoomId={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
       </div>
     </div>
   );
 };
-
 export default Result;

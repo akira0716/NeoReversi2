@@ -10,10 +10,10 @@ import {
 
 // Board - リアルタイム取得
 export const realTimeGet = (
-  roomId: String,
-  setData: React.Dispatch<React.SetStateAction<any[]>>
+  roomId: string,
+  setData: React.Dispatch<React.SetStateAction<any | undefined>>
 ) => {
-  const boardRef = collection(db, "rooms", String(roomId), "board");
+  const boardRef = collection(db, "rooms", roomId, "board");
   onSnapshot(boardRef, (post) => {
     setData(post.docs.map((doc) => ({ ...doc.data() })));
   });
@@ -21,7 +21,7 @@ export const realTimeGet = (
 
 // GameInfo - リアルタイム取得
 export const realTimeGet2 = (
-  roomId: String,
+  roomId: string,
   setData: React.Dispatch<React.SetStateAction<any | undefined>>
 ) => {
   onSnapshot(doc(db, "rooms", String(roomId)), (post) => {
@@ -68,7 +68,7 @@ export const updateBoard = (roomId: String, board: any) => {
 };
 
 // GameInfo - 更新
-export const updateGameInfo = (roomId: String, gameInfo: any) => {
+export const updateGameInfo = (roomId: string, gameInfo: any) => {
   try {
     const gameInfoRef = doc(collection(db, "rooms"), roomId);
     updateDoc(gameInfoRef, gameInfo);

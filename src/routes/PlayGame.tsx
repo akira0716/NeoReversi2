@@ -14,9 +14,17 @@ interface PlayGameProps {
   setResult: React.Dispatch<React.SetStateAction<string>>;
 }
 
+interface gameInfo {
+  turn: number;
+  roomState: boolean;
+}
+
 const PlayGame: React.FC<PlayGameProps> = ({ me, roomId, setResult }) => {
-  const [board, setBoard] = useState<number[][]>([]);
-  const [gameInfo, setGameInfo] = useState({});
+  const [board, setBoard] = useState([]);
+  const [gameInfo, setGameInfo] = useState<gameInfo>({
+    turn: 1,
+    roomState: true,
+  });
   const [counter, setCounter] = useState({ black: 0, white: 0 });
   const [matchOver, setMatchOver] = useState(false);
 

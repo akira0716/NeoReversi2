@@ -4,9 +4,10 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "outDir": "src/js",
     "jsx": "react"

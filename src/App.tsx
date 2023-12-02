@@ -18,9 +18,7 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={
-            <GameTitle setMe={setMe} roomId={roomId} setRoomId={setRoomId} />
-          }
+          element={<GameTitle setMe={setMe} setRoomId={setRoomId} />}
         />
         <Route
           path="/PlayGame"

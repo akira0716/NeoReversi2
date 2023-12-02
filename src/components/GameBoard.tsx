@@ -115,7 +115,16 @@ const GameBoard: React.FC<GameBoardProps> = ({
           })}
         </div>
       </div>
-      <ModalBase kind={3} />
+      <ModalBase
+        kind={3}
+        setMe={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+        setRoomId={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+        roomId={""}
+      />
     </>
   );
 };

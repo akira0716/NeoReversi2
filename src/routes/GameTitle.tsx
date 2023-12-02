@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MusoImg from "../public/muso.png";
 import { getLot } from "../logic/Random_logic";
@@ -7,11 +7,10 @@ import ModalBase from "../components/ModalBase";
 
 interface HomeProps {
   setMe: React.Dispatch<React.SetStateAction<number>>;
-  roomId: string;
   setRoomId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Home: React.FC<HomeProps> = ({ setMe, roomId, setRoomId }) => {
+const Home: React.FC<HomeProps> = ({ setMe, setRoomId }) => {
   const navigate = useNavigate();
   const [modalKind, setModalKind] = useState(0);
 
@@ -91,7 +90,7 @@ const Home: React.FC<HomeProps> = ({ setMe, roomId, setRoomId }) => {
       <ModalBase
         kind={modalKind}
         setMe={setMe}
-        roomId={roomId}
+        roomId={""}
         setRoomId={setRoomId}
       />
     </>
