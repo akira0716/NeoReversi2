@@ -8,8 +8,14 @@ import {
 import { scoreCounter } from "../logic/GameBoard_logic";
 import PanelGameInfo from "../components/PanelGameInfo";
 
-const PlayGame = ({ me, roomId, setResult }) => {
-  const [board, setBoard] = useState([]);
+interface PlayGameProps {
+  me: number;
+  roomId: string;
+  setResult: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const PlayGame: React.FC<PlayGameProps> = ({ me, roomId, setResult }) => {
+  const [board, setBoard] = useState<number[][]>([]);
   const [gameInfo, setGameInfo] = useState({});
   const [counter, setCounter] = useState({ black: 0, white: 0 });
   const [matchOver, setMatchOver] = useState(false);

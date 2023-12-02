@@ -5,7 +5,13 @@ import { getLot } from "../logic/Random_logic";
 // import CreateRoomModal from "../components/CreateRoomModal";
 import ModalBase from "../components/ModalBase";
 
-const Home = ({ setMe, setRoomId }) => {
+interface HomeProps {
+  setMe: React.Dispatch<React.SetStateAction<number>>;
+  roomId: string;
+  setRoomId: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Home: React.FC<HomeProps> = ({ setMe, roomId, setRoomId }) => {
   const navigate = useNavigate();
   const [modalKind, setModalKind] = useState(0);
 
@@ -21,10 +27,10 @@ const Home = ({ setMe, setRoomId }) => {
   };
 
   // [ルームを作成する], [ルームに参加する]ボタン押下時処理
-  const onClickModalOpen = (e) => {
+  const onClickModalOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     // ボタンの"data-kind"属性の値を設定し、モーダルの種類を変更
-    setModalKind(Number(e.target.getAttribute("data-kind")));
-    document.getElementById("my_modal_4").showModal();
+    setModalKind(Number((e.target as HTMLElement).getAttribute("data-kind")));
+    (document.getElementById("my_modal_4") as HTMLDialogElement).showModal();
   };
 
   return (
@@ -82,7 +88,12 @@ const Home = ({ setMe, setRoomId }) => {
           </p>
         </div>
       </div>
-      <ModalBase kind={modalKind} setMe={setMe} setRoomId={setRoomId} />
+      <ModalBase
+        kind={modalKind}
+        setMe={setMe}
+        roomId={roomId}
+        setRoomId={setRoomId}
+      />
     </>
   );
 };

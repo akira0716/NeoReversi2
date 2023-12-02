@@ -5,18 +5,8 @@ interface Cell {
   col: number;
 }
 
-interface BoardState {
-  state: number[];
-}
-
 interface Board {
-  length: number;
-  [index: number]: BoardState;
-}
-
-interface Score {
-  black: number;
-  white: number;
+  state: number[];
 }
 
 export const putKoma = (value: number): React.ReactNode => {
@@ -35,7 +25,7 @@ export const putKoma = (value: number): React.ReactNode => {
 };
 
 export const checkValidMove = (
-  board: Board,
+  board: any,
   row: number,
   col: number,
   player: number,
@@ -107,7 +97,7 @@ export const checkValidMove = (
 };
 
 // ゲーム終了時判定
-export const isMatchOver = (board: Board, player: number): boolean => {
+export const isMatchOver = (board: Board[], player: number): boolean => {
   if (board.length === 0) {
     return false;
   }
@@ -126,7 +116,9 @@ export const isMatchOver = (board: Board, player: number): boolean => {
 };
 
 // コマの数をカウントする関数
-export const scoreCounter = (board: Board): Score => {
+export const scoreCounter = (
+  board: Board[]
+): { black: number; white: number } => {
   let black = 0;
   let white = 0;
 
