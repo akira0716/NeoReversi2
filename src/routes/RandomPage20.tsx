@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import horrorImage from "../public/horror01.png";
 import sadako from "../public/sadako.jpg";
 
-const RandomPage20 = () => {
+const RandomPage20: React.FC = () => {
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();

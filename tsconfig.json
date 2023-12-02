@@ -10,7 +10,13 @@
     "noImplicitAny": false,
     "noImplicitReturns": true,
     "outDir": "src/js",
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["*", "public/*"]
+    },
+    "allowJs": true,
+    "checkJs": false
   },
-  "include": ["src/**/*.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.png"]
 }

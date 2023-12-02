@@ -8,7 +8,7 @@ import Result from "./routes/Result";
 import RandomPage20 from "./routes/RandomPage20";
 import RandomPage80 from "./routes/RandomPage80";
 
-const App = () => {
+const App: React.FC = () => {
   const [roomId, setRoomId] = useState("");
   const [me, setMe] = useState(0);
   const [result, setResult] = useState("");
